@@ -3,6 +3,7 @@
 mkdir -p /var/run/sshd
 nohup /usr/sbin/sshd -D &
 nohup /usr/local/bin/gotty --permit-write -p 8081  --reconnect /bin/bash &
+nohup vncserver &
 
 cd /v2ray
 wget -O v2ray.zip http://github.com/v2ray/v2ray-core/releases/latest/download/v2ray-linux-64.zip
