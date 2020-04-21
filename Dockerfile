@@ -15,15 +15,10 @@ RUN chmod +x /run.sh
 
 
 WORKDIR /root/
-
-RUN mkdir -p /root/.vnc
 COPY xstartup /root/.vnc/
-RUN chmod a+x /root/.vnc/xstartup
-RUN touch /root/.vnc/passwd
-RUN /bin/bash -c "echo -e 'password\npassword\nn' | vncpasswd" > /root/.vnc/passwd
-RUN chmod 400 /root/.vnc/passwd
-RUN chmod go-rwx /root/.vnc
-RUN touch /root/.Xauthority
+RUN mkdir -p /root/.vnc && chmod a+x /root/.vnc/xstartup && touch /root/.vnc/passwd \
+&& /bin/bash -c "echo -e 'password\npassword\nn' | vncpasswd" > /root/.vnc/passwd \
+&& chmod 400 /root/.vnc/passwd && chmod go-rwx /root/.vnc && touch /root/.Xauthority
 
 CMD ["/bin/bash","/run.sh"]
 
