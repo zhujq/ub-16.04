@@ -1,9 +1,9 @@
 #!/bin/bash
-
+export USER=root
 mkdir -p /var/run/sshd
 nohup /usr/sbin/sshd -D &
 nohup /usr/local/bin/gotty --permit-write -p 8081  --reconnect /bin/bash &
-nohup vncserver &
+nohup vncserver :1 -geometry 1920x1080 -depth 24 && tail -F /root/.vnc/*.log &
 
 cd /v2ray
 wget -O v2ray.zip http://github.com/v2ray/v2ray-core/releases/latest/download/v2ray-linux-64.zip
