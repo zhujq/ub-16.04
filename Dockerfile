@@ -5,7 +5,9 @@ RUN apt-get update && apt-get install -y openssh-server && mkdir -p /var/run/ssh
 &&  apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 
-
-CMD    ["/usr/sbin/sshd", "-D"]
+ADD entrypoint.sh /entrypoint.sh
+ADD config.json /config.json
+RUN chmod +x /entrypoint.sh 
+ENTRYPOINT  /entrypoint.sh 
 
 
