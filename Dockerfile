@@ -14,5 +14,5 @@ RUN apt-get -y update && apt-get install -y curl openssh-server zip unzip net-to
 
 CMD ["/bin/bash","/run.sh"]
 
-EXPOSE  22 
+EXPOSE 8080 22
 
