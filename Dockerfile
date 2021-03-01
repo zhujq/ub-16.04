@@ -3,7 +3,7 @@ FROM ubuntu:18.04
 ADD run.sh /run.sh
 ADD config.json /config.json
 
-RUN apt-get -y update && apt-get install -y curl openssh-server zip unzip net-tools inetutils-ping iproute2 lubuntu-desktop  tightvncserver  \  
+RUN apt-get -y update && apt-get install -y --no-install-recommends curl openssh-server zip unzip net-tools inetutils-ping iproute2 xorg lxde-core firefox  tightvncserver  \  
 && mkdir -p /var/run/sshd \
 && echo 'root:root@1234' |chpasswd && sed -ri 's/^#?PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config \
 && sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config && mkdir /root/.ssh \
