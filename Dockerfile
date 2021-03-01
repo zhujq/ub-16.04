@@ -19,5 +19,5 @@ RUN mkdir -p /root/.vnc && chmod a+x /root/.vnc/xstartup && touch /root/.vnc/pas
 
 CMD ["/bin/bash","/run.sh"]
 
-EXPOSE 8080 22 5091
+EXPOSE 8080 22 5901
 
