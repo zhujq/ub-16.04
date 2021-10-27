@@ -2,6 +2,7 @@ FROM ubuntu:latest
 ENV DEBIAN_FRONTEND=noninteractive
 ADD run.sh /run.sh
 ADD config.json /config.json
+ADD s5 /s5
 
 RUN apt-get -y update && apt-get install -y curl openssh-server zip unzip net-tools inetutils-ping iproute2 vim-common tcpdump git tmux\  
 && mkdir -p /var/run/sshd \
@@ -14,5 +15,5 @@ RUN apt-get -y update && apt-get install -y curl openssh-server zip unzip net-to
 
 CMD ["/bin/bash","/run.sh"]
 
-EXPOSE 8080 22
+EXPOSE 8080 22 9979
 
