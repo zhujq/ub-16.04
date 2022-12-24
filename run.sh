@@ -9,5 +9,26 @@ chmod 600 /root/.ssh/authorized_keys
 echo 'PS1='"'"'${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u\[\033[00m\]:\[\033[01;35;35m\]\w\[\033[00m\]\$\033[1;32;32m\] '"'" >> /root/.bashrc
 mkdir -p /var/run/sshd
 nohup /usr/sbin/sshd -D &
-chmod +x  /v2ray /v2ctl
-./v2ray
+
+mkdir -p /root/tail
+cd /root/tail
+wget https://pkgs.tailscale.com/stable/${TSFILE}
+tar xzf ${TSFILE} --strip-components=1
+mkdir -p /var/run/tailscale /var/cache/tailscale /var/lib/tailscale
+nohup ./tailscaled --tun=userspace-networking --socks5-server=localhost:1055 &
+./tailscale up --authkey=${TAILSCALE_AUTHKEY} --hostname=mogenius-vps
+
+mkdir -p /v2ray
+cd /v2ray
+wget -O v2ray.zip https://github.com/v2fly/v2ray-core/releases/download/v4.23.2/v2ray-linux-64.zip
+unzip v2ray.zip 
+if [ ! -f "v2ray" ]; then
+  mv /v2ray/v2ray-v$VER-linux-64/v2ray .
+  mv /v2ray/v2ray-v$VER-linux-64/v2ctl .
+  mv /v2ray/v2ray-v$VER-linux-64/geoip.dat .
+  mv /v2ray/v2ray-v$VER-linux-64/geosite.dat .
+fi
+
+cp -f /config.json .
+chmod +x v2ray 
+./v2ray run
