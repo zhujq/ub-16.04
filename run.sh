@@ -16,7 +16,7 @@ wget https://pkgs.tailscale.com/stable/${TSFILE}
 tar xzf ${TSFILE} --strip-components=1
 mkdir -p /var/run/tailscale /var/cache/tailscale /var/lib/tailscale
 nohup ./tailscaled --tun=userspace-networking --socks5-server=localhost:1055 &
-./tailscale up --authkey=${TAILSCALE_AUTHKEY} --hostname=mogenius-vps
+./tailscale up --authkey=${TAILSCALE_AUTHKEY} --hostname={VPSNAME}
 
 mkdir -p /v2ray
 cd /v2ray
